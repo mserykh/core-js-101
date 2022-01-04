@@ -1,9 +1,9 @@
 /* ********************************************************************************************
  *                                                                                            *
- * Plese read the following tutorial before implementing tasks:                               *
+ * Please read the following tutorial before implementing tasks:                               *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array     *
  *                                                                                            *
- * NOTE : Please do not use loops! All tasks can be implmeneted using standard Array methods  *
+ * NOTE : Please do not use loops! All tasks can be implemented using standard Array methods  *
  *                                                                                            *
  ******************************************************************************************** */
 
@@ -180,7 +180,7 @@ function getTail(arr, n) {
 
 
 /**
- * Returns CSV represebtation of two-dimentional numeric array.
+ * Returns CSV representation of two-dimensional numeric array.
  * https://en.wikipedia.org/wiki/Comma-separated_values
  *
  * @param {array} arr
@@ -353,7 +353,7 @@ function getItemsSum(arr) {
  * Returns the number of all falsy value in the specified array
  *
  * @param {array} arr
- * @return {array}
+ * @return {number}
  *
  * @example
  *  [] => 0
@@ -366,7 +366,7 @@ function getFalsyValuesCount(arr) {
 }
 
 /**
- * Returns a number of all occurences of the specified item in an array
+ * Returns a number of all occurrences of the specified item in an array
  *
  * @param {array} arr
  * @param {any} item
@@ -379,12 +379,12 @@ function getFalsyValuesCount(arr) {
  *    [ null, undefined, null ], null => 2
  *    [ true, 0, 1, 'true' ], true => 1
  */
-function findAllOccurences(arr, item) {
+function findAllOccurrences(arr, item) {
   return arr.filter((element) => element === item).length;
 }
 
 /**
- * Concatenates all elements from specified array into single string with ',' delimeter
+ * Concatenates all elements from specified array into single string with ',' delimiter
  *
  * @param {array} arr
  * @return {string}
@@ -430,7 +430,7 @@ function sortCitiesArray(/* arr */) {
 }
 
 /**
- * Creates an indentity matrix of the specified size
+ * Creates an identity matrix of the specified size
  *
  * @param {number} n
  * @return {array}
@@ -537,7 +537,7 @@ function selectMany(arr, childrenSelector) {
 
 
 /**
- * Returns an element from the multidimentional array by the specified indexes.
+ * Returns an element from the multidimensional array by the specified indexes.
  *
  * @param {array} arr
  * @param {array} indexes
@@ -605,7 +605,7 @@ module.exports = {
   sortDigitNamesByNumericOrder,
   getItemsSum,
   getFalsyValuesCount,
-  findAllOccurences,
+  findAllOccurrences,
   sortCitiesArray,
   getIdentityMatrix,
   getIntervalArray,
