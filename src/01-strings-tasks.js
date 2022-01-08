@@ -202,8 +202,14 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  let result = '';
+  for (let i = 1; i <= height; i += 1) {
+    if (i === 1 || i === height) {
+      result = result.contact('_'.repeat(width));
+    }
+  }
+  return result;
 }
 
 
@@ -223,9 +229,9 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
-}
+/* function encodeToRot13(str) {
+
+} */
 
 /**
  * Returns true if the value is string; otherwise false.
@@ -240,9 +246,9 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
+/* function isString(value) {
   throw new Error('Not implemented');
-}
+} */
 
 
 /**
@@ -269,9 +275,9 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
+/* function getCardId(value) {
   throw new Error('Not implemented');
-}
+} */
 
 
 module.exports = {
@@ -287,7 +293,7 @@ module.exports = {
   convertToUpperCase,
   extractEmails,
   getRectangleString,
-  encodeToRot13,
+  /* encodeToRot13,
   isString,
-  getCardId,
+  getCardId, */
 };
