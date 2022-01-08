@@ -22,7 +22,6 @@ function concatenateStrings(value1, value2) {
   return value1 + value2;
 }
 
-
 /**
  * Returns the length of given string.
  *
