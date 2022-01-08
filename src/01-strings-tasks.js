@@ -204,8 +204,12 @@ function extractEmails(str) {
 function getRectangleString(width, height) {
   let result = '';
   for (let i = 1; i <= height; i += 1) {
-    if (i === 1 || i === height) {
-      result = result.contact('_'.repeat(width));
+    if (i === 1) {
+      result = result.concat('┌').concat('─'.repeat(width - 2)).concat('┐').concat('\n');
+    } else if (i === height) {
+      result = result.concat('└').concat('─'.repeat(width - 2)).concat('┘').concat('\n');
+    } else {
+      result = result.concat('│').concat(' '.repeat(width - 2)).concat('│').concat('\n');
     }
   }
   return result;
@@ -228,9 +232,29 @@ function getRectangleString(width, height) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-/* function encodeToRot13(str) {
-
-} */
+function encodeToRot13(str) {
+  let result = '';
+  const alphabetUp = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const alphabetLow = 'abcdefghijklmnopqrstuvwxyz';
+  for (let i = 0; i < str.length; i += 1) {
+    const el = str[i];
+    const index = alphabetUp.includes(el)
+      ? alphabetUp.indexOf(el)
+      : alphabetLow.indexOf(el);
+    if (!alphabetUp.includes(el) && !alphabetLow.includes(el)) {
+      result += el;
+    } else if (Math.floor(index / 13) === 0) {
+      result += alphabetUp.includes(el)
+        ? alphabetUp[index + 13]
+        : alphabetLow[index + 13];
+    } else {
+      result += alphabetUp.includes(el)
+        ? alphabetUp[index - 13]
+        : alphabetLow[index - 13];
+    }
+  }
+  return result;
+}
 
 /**
  * Returns true if the value is string; otherwise false.
@@ -245,9 +269,12 @@ function getRectangleString(width, height) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-/* function isString(value) {
-  throw new Error('Not implemented');
-} */
+function isString(value) {
+  if (typeof value === 'object' && value !== null) {
+    return typeof value.valueOf() === 'string';
+  }
+  return typeof value === 'string';
+}
 
 
 /**
@@ -274,9 +301,13 @@ function getRectangleString(width, height) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-/* function getCardId(value) {
-  throw new Error('Not implemented');
-} */
+function getCardId(value) {
+  const deck = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+  return deck.indexOf(value);
+}
 
 
 module.exports = {
@@ -292,7 +323,7 @@ module.exports = {
   convertToUpperCase,
   extractEmails,
   getRectangleString,
-  /* encodeToRot13,
+  encodeToRot13,
   isString,
-  getCardId, */
+  getCardId,
 };
