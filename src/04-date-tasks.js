@@ -77,8 +77,13 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
-function timeSpanToString(/* startDate, endDate */) {
-  throw new Error('Not implemented');
+function timeSpanToString(startDate, endDate) {
+  const span = Math.abs(endDate - startDate);
+  const hours = Math.floor(span / 3600000).toString();
+  const mins = Math.floor((span - 3600000 * hours) / 60000).toString();
+  const secs = Math.floor((span - 3600000 * hours - 60000 * mins) / 1000).toString();
+  const milisecs = (span - 3600000 * hours - 60000 * mins - 1000 * secs).toString();
+  return `${hours.padStart(2, '0')}:${mins.padStart(2, '0')}:${secs.padStart(2, '0')}.${milisecs.padStart(3, '0')}`;
 }
 
 
@@ -98,8 +103,13 @@ function timeSpanToString(/* startDate, endDate */) {
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
-function angleBetweenClockHands(/* date */) {
-  throw new Error('Not implemented');
+function angleBetweenClockHands(date) {
+  const hours = date.getUTCHours() % 12;
+  const minutes = date.getUTCMinutes();
+  const minutsAngle = (minutes * 360) / 60;
+  const hoursAngle = (hours * 360) / 12 + minutsAngle / 12;
+  const angle = Math.abs(hoursAngle - minutsAngle);
+  return angle > 180 ? ((angle - 180) / 180) * Math.PI : (angle / 180) * Math.PI;
 }
 
 
