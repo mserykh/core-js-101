@@ -100,8 +100,8 @@ function getArrayOfStrings(arr) {
  *    [ 1, 2, 3, 4, 5, 'false' ]         => [ 1, 2, 3, 4, 5, 'false' ]
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
-function removeFalsyValues(/* arr */) {
-  throw new Error('Not implemented');
+function removeFalsyValues(arr) {
+  return arr.filter((el) => !!el);
 }
 
 /**
@@ -425,10 +425,24 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
+function sortCitiesArray(arr) {
+  function toLowerCase(obj, prop) {
+    return obj[prop].toLowerCase();
+  }
+  return arr
+    .sort((a, b) => {
+      if (toLowerCase(a, 'country') > toLowerCase(b, 'country')) {
+        return 1;
+      }
+      if (toLowerCase(a, 'country') < toLowerCase(b, 'country')) {
+        return -1;
+      }
+      if (toLowerCase(a, 'city') > toLowerCase(b, 'city')) {
+        return 1;
+      }
+      return -1;
+    });
 }
-
 /**
  * Creates an identity matrix of the specified size
  *
@@ -447,8 +461,11 @@ function sortCitiesArray(/* arr */) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const newArray = Array(n).fill(Array(n).fill(0));
+  const result = newArray.map((arr, arrIndex) => arr
+    .map((el, elIndex) => (elIndex === arrIndex ? el + 1 : el)));
+  return result;
 }
 
 /**
@@ -464,8 +481,11 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  if (start === end) return new Array(1).fill(start);
+  const newArr = Array(Math.abs(end - start + 1)).fill(start);
+  const result = newArr.map((el, index) => el + index);
+  return result;
 }
 
 /**
@@ -479,8 +499,9 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const result = new Set(arr);
+  return [...result];
 }
 
 /**
@@ -513,8 +534,18 @@ function distinct(/* arr */) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  return array.reduce((acc, elem) => {
+    const key = keySelector(elem);
+    const value = valueSelector(elem);
+    if (acc.get(key)) {
+      const valueInMap = acc.get(key);
+      valueInMap.push(value);
+    } else {
+      acc.set(key, [value]);
+    }
+    return acc;
+  }, new Map());
 }
 
 
